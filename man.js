@@ -152,7 +152,7 @@ document.querySelectorAll("h1").forEach(async (element) => {
     // console.log(element)
 
     // element.target.style.color = "green"
-    let i = 'ur gay';
+    let i = 'UR Gay';
     let ii = setInterval(async() => {
         element.innerHTML = i
             .split("")
