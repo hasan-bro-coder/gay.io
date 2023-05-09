@@ -11,10 +11,44 @@
   padding: 0%;
   scroll-behavior: smooth;
   overflow-x: hidden !important;
+  color: white;
 }
 body {
   overflow-x: hidden;
   background-color: black;
+}
+.nam{
+  pointer-events: none;
+  background-color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.nam label{
+  /* width: 189px; */
+  /* height: 20px; */
+  border-radius: 4px;
+  font-size: 20px;
+  font-family: "Cinzel Decorative";
+}
+.nam input{
+  pointer-events:all;
+  color: black;
+  margin-top: 20px;
+  width: 189px;
+  height: 20px;
+  border-radius: 4px;
+}
+.nam button{
+  margin-left: -130px;
+  pointer-events:all;
 }
 /* @keyframes spin {
     0%{
@@ -162,6 +196,7 @@ button a{
   }
 }
 h2{
+  margin-left: -150px;
   color: rgb(255, 255, 255);
   font-family:"Space Mono",monospace ;
 }
@@ -178,7 +213,7 @@ h2{
 }
 .img_div img{
   z-index: 2;
-  width: min(600px,90vw);
+  width: clamp(350px,90vw,600px);
   aspect-ratio: 16 / 9 ;
 }
 ::-webkit-scrollbar-corner {
@@ -199,7 +234,31 @@ h2{
   width: 5px;
   opacity: 1;
 } */
+.credit{
+  position: absolute;
+  top: 1300px;
+  z-index: 10;
+  color: rgb(255, 255, 255);
+  font-family:"Space Mono",monospace ;
 
+}
+.credit h3{
+  font-size: 40px;
+  text-transform: capitalize;
+  text-align: center;
+
+
+}
+.credit h4{
+  color: rgb(95, 95, 95);
+
+  font-size: 25px;
+  text-transform: capitalize;
+}
+.credit ul li{
+  color: rgb(95, 95, 95);
+  text-transform: capitalize;
+}
 ::-webkit-scrollbar{
   background-color: transparent;
   color: #aba499;

@@ -1,27 +1,44 @@
 import * as THREE from "https://unpkg.com/three@0.127.0/build/three.module";
 import { OrbitControls } from "https://unpkg.com/three@0.127.0/examples/jsm/controls/OrbitControls";
 
-
+let ismobile = navigator.userAgent.match(/Android/i) ||navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) ||navigator.userAgent.match(/iPad/i) ||navigator.userAgent.match(/iPod/i) ||navigator.userAgent.match(/BlackBerry/i) ||navigator.userAgent.match(/Windows Phone/i);
 let l = "ABDEFGHIJKLMNOPQRSTUVWXYUZ";
 let ee = 0;
 gsap.registerPlugin(ScrollTrigger,SmoothScroll);
 SmoothScroll("body");
-
+$("html, body").animate({ scrollTop: 0 }, "slow");
 // 'baharul' ;
 let myFont = new FontFace(
     "Pangolin",
     "url(https://fonts.gstatic.com/s/pangolin/v6/cY9GfjGcW0FPpi-tWMfN79z4i6BH.woff2)"
-  );$("html, body").animate({ scrollTop: 0 }, "slow");
+  );
+ 
 // document.onload = () => {
 // window.scrollY = 0
     
-// };
-$('html,body').css('overflow', 'hidden');let nam = 
-prompt('please enter your name')
-while(nam == null || nam == undefined ||nam == ''){
-    nam = 
-prompt()
-}
+// }
+let nam;
+//  = 'stranger'
+$('html,body').css('overflow', 'hidden');
+$('.nam').submit(function (e) { 
+    e.preventDefault();
+    console.log($('.nam input').val());
+    nam = $('.nam input').val() || 'baharul'
+    $( ".nam" ).animate({
+        opacity: 0,
+      }, 1000, function() { 
+        $('.nam ').css('display', 'none')
+        // Animation complete.
+      });
+   
+    
+});
+// document.querySelector('.nam input').value
+
+// while(nam == null || nam == undefined ||nam == ''){
+    // nam = nam = $('.nam input').val()
+// }
+
  async function voic(text) {
     let person = new SpeechSynthesisUtterance(text)
     person.rate = 0.6
@@ -30,117 +47,10 @@ prompt()
     speechSynthesis.speak(person)
     
 } 
-function sleep(ms) {
-	return new Promise((resolve) => setTimeout(resolve, ms));
-}gsap.to('h1',{duration: 1,rotation:360})
-
-// document.querySelector('body').style.overflow = 'hidden !important';
-document.querySelector('button').onclick = () => {;
-
-document.querySelectorAll("h1").forEach(async (element) => {
-    // console.log(element)
-
-    // element.target.style.color = "green"
-    let i = 'UR Gay';
-    let ii = setInterval(async() => {
-        element.innerHTML = i
-            .split("")
-            .map((le, ind) => {
-                // console.log(le);
-                if (ind +16 < ee) {
-                    // console.log(ind);
-                    return i[ind];
-                }
-                return l[Math.floor(Math.random() * l.length)];
-            })
-            .join("");
-       
-        if (ee >= i.length + 21) {
-            // element.style.color = "white"
-            // document.body.style.overflowY = "visible";
-            // document.body.style.overflowX = "hidden";
-            clearInterval(ii); 
-            voic(`congratulation ${nam} your successfully gay now`)
-            await sleep(3000);
-            $('html,body').css('overflow', 'scroll');
-            // document.querySelector('audio').volume = 
-            document.querySelector('audio').play();
-            
-            // o += 1
-            // ee = 0;
-        }
-        ee += 1 / 4;
-        // console.log(element)
-    }, 30);
-});
-}
-(() => {
-const scene = new THREE.Scene();
-
-const camera = new THREE.PerspectiveCamera(
-	45,
-	window.innerWidth / window.innerHeight,
-	0.1,
-	10000
-);
-
-const renderer = new THREE.WebGLRenderer({
-	canvas: document.querySelector(".bg"),
-	// alpha: true,
-});
-renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.setZ(100);
-renderer.render(scene, camera);
-
-const pointLight = new THREE.PointLight(0xffffff, 0.8);
-pointLight.position.set(40, 30, 90);
-const lightHelper = new THREE.PointLightHelper(pointLight);
-const controls = new OrbitControls(camera, document.querySelector(".bg"));
-controls.enableDamping = true;
-	controls.enablePan = false;
-	controls.enableZoom = false;
-	controls.autoRotate = true;
-	controls.autoRotateSpeed = 3;
-	controls.keyPanSpeed = "20px";
-scene.add(lightHelper, pointLight)
-function addStar() {
-	const geometry = new THREE.SphereGeometry(0.3, 24, 24);
-	const material = new THREE.MeshStandardMaterial({
-		// flatShading:true,
-		// depthTest: false,
-		// depthWrite: false,
-		// color:0x049ef4 ,
-		// wireframe:true,
-		roughness: 0.4,
-		color: 0xffffff,
-	});
-	const star = new THREE.Mesh(geometry, material);
-
-	const z = THREE.MathUtils.randFloatSpread(100);
-	let x = THREE.MathUtils.randFloatSpread(window.innerWidth / 6.5);
-	let y = THREE.MathUtils.randFloatSpread(window.innerHeight / 4.5);
-	star.position.set(x, y, z);
-	scene.add(star);
-}
-Array(500).fill().forEach(addStar);
-function animate() {
-	renderer.render(scene, camera);
-	
-	
-	// a = a > 10 ? 0 : c % 10 == 0 ? a+1 : a +0.01;
-	// scene.remove(torus);
-	controls.update();
-	
-	
-	requestAnimationFrame(animate);
-	
-}
-animate()})()
 function textToImageDataUrl(text){
     const canvas = document.createElement("canvas");
-    canvas.width = document.querySelector('img').width;
-    canvas.height = document.querySelector('img').height;
+    canvas.width = 600;
+    canvas.height = 337.500;
     console.log(canvas.width,canvas.height);
     const context = canvas.getContext("2d");
     context.rect(0, 0,canvas.width,canvas.height);
@@ -231,12 +141,119 @@ function textToImageDataUrl(text){
     // canvas.width / 2 - 80,canvas.height / 2 - 60
     return canvas.toDataURL("image/jpeg");
 }
-myFont.load().then((font) => {
-    document.fonts.add(font);
-    console.log("Font loaded");
-document.querySelector('img').src = textToImageDataUrl(nam.charAt(0).toUpperCase() + nam.slice(1))
-document.querySelector('a').href = textToImageDataUrl(nam.charAt(0).toUpperCase() + nam.slice(1))
-})
+function sleep(ms) {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+}gsap.to('h1',{duration: 1,rotation:360})
+
+// document.querySelector('body').style.overflow = 'hidden !important';
+document.querySelector('.btn').onclick = () => {;
+
+document.querySelectorAll("h1").forEach(async (element) => {
+    // console.log(element)
+
+    // element.target.style.color = "green"
+    let i = 'ur gay';
+    let ii = setInterval(async() => {
+        element.innerHTML = i
+            .split("")
+            .map((le, ind) => {
+                // console.log(le);
+                if (ind +26 < ee) {
+                    // console.log(ind);
+                    return i[ind];
+                }
+                return l[Math.floor(Math.random() * l.length)];
+            })
+            .join("");
+       
+        if (ee >= i.length + 31) {
+            // element.style.color = "white"
+            // document.body.style.overflowY = "visible";
+            // document.body.style.overflowX = "hidden";
+            clearInterval(ii); 
+            voic(`congratulation ${nam} your successfully gay now`)
+            await sleep(3000);
+            $('html,body').css('overflow', 'scroll');
+            myFont.load().then((font) => {
+                document.fonts.add(font);
+                console.log("Font loaded");
+            document.querySelector('img').src = textToImageDataUrl(nam.charAt(0).toUpperCase() + nam.slice(1))
+            document.querySelector('a').href = textToImageDataUrl(nam.charAt(0).toUpperCase() + nam.slice(1))
+            })
+            // document.querySelector('audio').volume = 
+            document.querySelector('audio').play();
+            
+            // o += 1
+            // ee = 0;
+        }
+        ee += 1 / 4;
+        // console.log(element)
+    }, 30);
+});
+}
+(() => {
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(
+	45,
+	window.innerWidth / window.innerHeight,
+	0.1,
+	10000
+);
+
+const renderer = new THREE.WebGLRenderer({
+	canvas: document.querySelector(".bg"),
+	// alpha: true,
+});
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setSize(window.innerWidth, window.innerHeight);
+camera.position.setZ(100);
+renderer.render(scene, camera);
+
+const pointLight = new THREE.PointLight(0xffffff, 0.8);
+pointLight.position.set(40, 30, 90);
+const lightHelper = new THREE.PointLightHelper(pointLight);
+const controls = new OrbitControls(camera, document.querySelector(".bg"));
+controls.enableDamping = true;
+	controls.enablePan = false;
+	controls.enableZoom = false;
+	controls.autoRotate = true;
+	controls.autoRotateSpeed = 3;
+	controls.keyPanSpeed = "20px";
+scene.add(lightHelper, pointLight)
+function addStar() {
+	const geometry = new THREE.SphereGeometry(0.3, 24, 24);
+	const material = new THREE.MeshStandardMaterial({
+		// flatShading:true,
+		// depthTest: false,
+		// depthWrite: false,
+		// color:0x049ef4 ,
+		// wireframe:true,
+		roughness: 0.4,
+		color: 0xffffff,
+	});
+	const star = new THREE.Mesh(geometry, material);
+
+	const z = THREE.MathUtils.randFloatSpread(100);
+	let x = THREE.MathUtils.randFloatSpread(window.innerWidth / 6.5);
+	let y = THREE.MathUtils.randFloatSpread(window.innerHeight / 4.5);
+	star.position.set(x, y, z);
+	scene.add(star);
+}
+Array(500).fill().forEach(addStar);
+function animate() {
+	renderer.render(scene, camera);
+	
+	
+	// a = a > 10 ? 0 : c % 10 == 0 ? a+1 : a +0.01;
+	// scene.remove(torus);
+	controls.update();
+	
+	
+	requestAnimationFrame(animate);
+	
+}
+animate()})()
 
 
 // gsap.to(".main",{
@@ -281,7 +298,7 @@ gsap.to("h2",{
 	// ScrollTrigger: ".cen h1" ,
 	scrollTrigger: {
 		trigger: "h2",
-		start: "bottom bottom", 
+		start: "top bottom", 
 		// pin: true,
 		// snap: 1 ,
 		scrub: 2,
@@ -290,9 +307,8 @@ gsap.to("h2",{
 		end: () => "+=" + (document.querySelector("h1").offsetWidth - 50),
         onEnter: () =>{voic('hear is your certificate')}
 	},
-	opacity: 1,
 	// rotation: 360,
-	x: window.innerWidth / 2 - 100 ,
+	x: window.innerWidth / 2 ,
 	// left: 0,
 	duration: 1,
 })
