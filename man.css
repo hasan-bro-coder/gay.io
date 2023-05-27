@@ -10,11 +10,12 @@
   margin: 0%;
   padding: 0%;
   scroll-behavior: smooth;
-  overflow-x: hidden !important;
+ 
   color: white;
 }
-body {
-  overflow-x: hidden;
+body,html{
+  overflow-x: hidden; 
+  overflow-x: hidden !important;
   background-color: black;
 }
 .nam{
@@ -39,13 +40,22 @@ body {
   font-family: "Cinzel Decorative";
 }
 .nam input{
+  transition: 1s ;
   pointer-events:all;
   color: black;
+  font-family: monospace;
+  text-align: center;
   margin-top: 20px;
   width: 189px;
   height: 20px;
+  border: none;
   border-radius: 4px;
 }
+/* .nam:hover input{
+  height: 20px;
+  border: inherit;
+  /* border-radius: 4px; */
+
 .nam button{
   margin-left: -130px;
   pointer-events:all;
@@ -58,11 +68,14 @@ body {
       transform: rotateZ(360);
     }
 } */
-h1{
+.main h1{
   color: rgb(255, 255, 255);
-  font-size: 5rem;
+  font-size: calc(100vh / 15);
   font-family:"Space Mono",monospace ;
   animation: pan 3s infinite;
+  text-align: center;
+  width: 100vw;
+  height: min-content;
   /* animation: spin 3s infinite; */
 }
 .bg{
@@ -236,7 +249,7 @@ h2{
 } */
 .credit{
   position: absolute;
-  top: 1300px;
+  top: 200vh;
   z-index: 10;
   color: rgb(255, 255, 255);
   font-family:"Space Mono",monospace ;
