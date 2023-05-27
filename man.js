@@ -1,7 +1,17 @@
 import * as THREE from "https://unpkg.com/three@0.127.0/build/three.module";
 import { OrbitControls } from "https://unpkg.com/three@0.127.0/examples/jsm/controls/OrbitControls";
+AOS.init();
+let ismobile =
 
-let ismobile = navigator.userAgent.match(/Android/i) ||navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) ||navigator.userAgent.match(/iPad/i) ||navigator.userAgent.match(/iPod/i) ||navigator.userAgent.match(/BlackBerry/i) ||navigator.userAgent.match(/Windows Phone/i);
+	navigator.userAgent.match(/Android/i) ||
+	navigator.userAgent.match(/webOS/i) ||
+	navigator.userAgent.match(/iPhone/i) ||
+	navigator.userAgent.match(/iPad/i) ||
+	navigator.userAgent.match(/iPod/i) ||
+	navigator.userAgent.match(/BlackBerry/i) ||
+	navigator.userAgent.match(/Windows Phone/i)||
+    navigator.userAgent.match(/Mozilla/i)
+     ? true : false
 let l = "ABDEFGHIJKLMNOPQRSTUVWXYUZ";
 let ee = 0;
 gsap.registerPlugin(ScrollTrigger,SmoothScroll);
@@ -22,8 +32,8 @@ let nam;
 $('html,body').css('overflow', 'hidden');
 $('.nam').submit(function (e) { 
     e.preventDefault();
-    console.log($('.nam input').val());
-    nam = $('.nam input').val() || 'baharul'
+    console.log(names($('.nam input').val()));
+    nam = $('.nam input').val()
     $( ".nam" ).animate({
         opacity: 0,
       }, 1000, function() { 
@@ -38,13 +48,40 @@ $('.nam').submit(function (e) {
 // while(nam == null || nam == undefined ||nam == ''){
     // nam = nam = $('.nam input').val()
 // }
-
+function names(rname){
+    
+    if(!rname){
+    return 'a stranger'
+    }
+    $('.nam input').val().split("").reverse().join("").startsWith('a'); 
+    if(rname.split("").reverse().join("").startsWith('a')){
+        if(rname.match(/ayesha/ig)) return 'a dadi'
+        return 'a lesbo'
+    }
+    else if(rname.split("").reverse().join("").startsWith('i')){
+          if (rname.match(/madani/ig)) {
+            return 'a bhondo'
+        }
+        if (rname.match(/ali/ig)) {
+            return 'gay hijra lgbtq anime lover'
+        }
+        return 'a hijra'
+    }
+    else{
+        if (rname.match(/hasan/ig)) return 'a dharmik'
+        if(rname.match(/nabil/ig) || rname.match(/arafat/ig) || rname.match(/baharul/ig) || rname.match(/forhad/ig))return'My Bro'
+        if(rname.match(/salah[A-Z]*/ig) || rname.match(/moti[A-Z]*/ig) || rname.match(/moti[A-Z]*/ig) || rname.match(/moti[A-Z]*/ig) || rname.match(/kawsar[A-Z]*/ig)) return 'a daddy'
+        else return 'gay'
+    }
+}
  async function voic(text) {
     let person = new SpeechSynthesisUtterance(text)
     person.rate = 0.6
+    console.log(person.voice)
     // person.volume = 0.5
-    speechSynthesis.cancel();
-    speechSynthesis.speak(person)
+    await speechSynthesis.cancel();
+    await speechSynthesis.resume()
+    await speechSynthesis.speak(person)
     
 } 
 function textToImageDataUrl(text){
@@ -64,14 +101,14 @@ function textToImageDataUrl(text){
     // context.fo
     // context.rotate(1)
     // context.textAlign = 'center'
-    context.fillText(`Congratulation ${text}`, canvas.width / 2 -161,canvas.height / 2 - 110);
+    context.fillText(`Congratulation ${text || 'stranger'}`, canvas.width / 2 -161,canvas.height / 2 - 110);
     context.lineWidth = 3
     context.beginPath();
     context.moveTo(canvas.width / 2 - 122 ,canvas.height / 2 - 96)
     context.lineTo(canvas.width /2 + 121, canvas.height / 2 - 96)
     context.stroke()
     context.font = "20px  monospace,Consolas";
-    context.fillText('for being gay', canvas.width / 2 - 75,canvas.height / 2 - 68);
+    context.fillText(`for being ${names(text)}`, canvas.width / 2 - 75,canvas.height / 2 - 68);
     context.font = "12px  monospace,Consolas";
     context.fillText('proudly presented to you', canvas.width / 2 - 81,canvas.height / 2 - 38);
     context.lineWidth = 1.5
@@ -92,7 +129,7 @@ function textToImageDataUrl(text){
     grd.addColorStop(0.5, "red");
     grd.addColorStop(1, "blue");
     context.fillStyle = grd
-    context.fillText('lgbtq cult', canvas.width / 2 + 47,canvas.height / 2 + 30);
+    context.fillText(`${names(text) == 'a daddy' ? 'daddys' : names(text) == 'a bhondo' ? 'bhondami' : names(text) == 'a dharmik' ? 'islamik' :  'lgbtq'} cult`, canvas.width / 2 + 47,canvas.height / 2 + 30);
     context.font = "19px monospace";
     context.fillStyle = 'black'
     context.fillText(`${new Date().toLocaleDateString()}`, canvas.width / 2 - 240,canvas.height / 2 + 100);
@@ -143,7 +180,8 @@ function textToImageDataUrl(text){
 }
 function sleep(ms) {
 	return new Promise((resolve) => setTimeout(resolve, ms));
-}gsap.to('h1',{duration: 1,rotation:360})
+}
+gsap.to('h1',{duration: 1,rotation:360})
 
 // document.querySelector('body').style.overflow = 'hidden !important';
 document.querySelector('.btn').onclick = () => {;
@@ -152,7 +190,8 @@ document.querySelectorAll("h1").forEach(async (element) => {
     // console.log(element)
 
     // element.target.style.color = "green"
-    let i = 'UR Gay';
+    let i = `UR ${names(nam) == 'gay hijra lgbtq anime lover' ? 'gay' : names(nam)}`;
+    i = i.toUpperCase()
     let ii = setInterval(async() => {
         element.innerHTML = i
             .split("")
@@ -171,17 +210,18 @@ document.querySelectorAll("h1").forEach(async (element) => {
             // document.body.style.overflowY = "visible";
             // document.body.style.overflowX = "hidden";
             clearInterval(ii); 
-            voic(`congratulation ${nam} your successfully gay now`)
-            await sleep(3000);
+            await voic(`congratulation ${nam} your ${names(nam) == 'a dadi' ? 'a dadi' : names(nam) == 'a daddy' ? 'a daddy' : names(nam) == 'a bhondo' ? 'a bhondo' : names(nam) == 'a stranger' ? 'a stranger':('successfully' + names(nam))} ${names(nam) == 'a dadi' ? '' :names(nam) == 'a daddy' ? '' : names(nam) == 'a bhondo' ? '' : names(nam) == 'a stranger' ? '' : 'now'}`)
+            console.log(`congratulation ${nam} your successfully ${names(nam)} ${names(nam) == 'a daddy' ? '' : names(nam) == 'a bhondo' ? '' : 'now'}`);
+            await sleep(3100);
             $('html,body').css('overflow', 'scroll');
             myFont.load().then((font) => {
                 document.fonts.add(font);
                 console.log("Font loaded");
-            document.querySelector('img').src = textToImageDataUrl(nam.charAt(0).toUpperCase() + nam.slice(1))
-            document.querySelector('a').href = textToImageDataUrl(nam.charAt(0).toUpperCase() + nam.slice(1))
+                document.querySelector('img').src = textToImageDataUrl(nam.charAt(0).toUpperCase() + nam.slice(1))
+                document.querySelector('a').href = textToImageDataUrl(nam.charAt(0).toUpperCase() + nam.slice(1))
+                document.querySelector('audio').play();
             })
             // document.querySelector('audio').volume = 
-            document.querySelector('audio').play();
             
             // o += 1
             // ee = 0;
@@ -214,12 +254,20 @@ const pointLight = new THREE.PointLight(0xffffff, 0.8);
 pointLight.position.set(40, 30, 90);
 const lightHelper = new THREE.PointLightHelper(pointLight);
 const controls = new OrbitControls(camera, document.querySelector(".bg"));
-controls.enableDamping = true;
-	controls.enablePan = false;
-	controls.enableZoom = false;
-	controls.autoRotate = true;
-	controls.autoRotateSpeed = 3;
-	controls.keyPanSpeed = "20px";
+console.log(ismobile);
+if(!ismobile){
+    controls.enableDamping = true;
+        controls.enablePan = false;
+        controls.enableZoom = false;
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 3;
+        controls.keyPanSpeed = "20px";
+
+}else{
+    controls.enabled = false;
+    controls.autoRotate = true;
+        controls.autoRotateSpeed = 3;
+}
 scene.add(lightHelper, pointLight)
 function addStar() {
 	const geometry = new THREE.SphereGeometry(0.3, 24, 24);
