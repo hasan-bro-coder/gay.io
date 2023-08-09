@@ -1,3 +1,2 @@
-# gay.io
-##link
+# link:
 https://hasan-bro-coder.github.io/gay.io/index.html
